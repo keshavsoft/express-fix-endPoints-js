@@ -4,6 +4,8 @@ import findInsertIndex from "./findInsertIndex.js";
 import writeFile from "../writeFile.js";
 import validateAppJsPath from "../../validations/validateAppJsPath.js";
 
+import buildUpdatedContent from "./buildUpdatedContent.js";
+
 const validateDuplicate = ({ content, jsFilePath, duplicationCheck }) => {
     return checkDuplicate({
         inContent: content,
@@ -17,57 +19,6 @@ const locateInsertPoint = ({ content, importInsertAfter }) => {
         inContent: content,
         inPatterns: importInsertAfter
     });
-};
-
-const buildUpdatedContent1 = ({
-    content,
-    insertInfo,
-    importLine
-}) => {
-    const before = content.slice(0, insertInfo.index);
-
-    const separator =
-        insertInfo.matchedPattern === "const router = "
-            ? "\n"
-            : "";
-
-    const suffix =
-        insertInfo.matchedPattern === "const router = "
-            ? "\n"
-            : "";
-
-    return before +
-        separator +
-        importLine +
-        suffix +
-        content.slice(insertInfo.index);
-};
-
-const buildUpdatedContent = ({
-    content,
-    insertInfo,
-    importLine
-}) => {
-    const before = content.slice(0, insertInfo.index);
-
-    const separator =
-        insertInfo.matchedPattern === "const router = "
-            ? "\n"
-            : "";
-
-    const suffix =
-        insertInfo.matchedPattern === "const router = "
-            ? "\n"
-            : "";
-
-    const isFirstInsert =
-        insertInfo.matchedPattern === "const router = ";
-
-    return before +
-        (isFirstInsert ? "\n\n" : "\n") +
-        importLine +
-        (isFirstInsert ? "\n" : "") +
-        content.slice(insertInfo.index);
 };
 
 const alterFile = ({

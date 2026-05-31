@@ -8,12 +8,12 @@ import validateEndpoint from "./validations/validateEndpoint.js";
 const buildLinesForImport = (endpoint) => {
     const safeName = endpoint.replace(/[^a-zA-Z0-9]/g, "_");
 
-    const importLine = `router.post("/${endpoint}", express.json(), (req, res) => ${endpoint}Func({ req, res, inTablePath: tablePath }));`;
+    const importLine = `router.post("/${endpoint}", express.json(), (req, res) => funcFrom${endpoint}({ req, res, inTablePath: tablePath }));`;
     const duplicationCheck = `router.use("/${endpoint}"`;
 
     const importInsertAfter =
         [
-            "router.use(",
+            "router.",
             "const router = "
         ];
 

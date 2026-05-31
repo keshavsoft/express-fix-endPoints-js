@@ -41,7 +41,8 @@ const alterFile = ({
     const updated = buildUpdatedContent({
         content,
         insertInfo,
-        importLine
+        importLine,
+        importInsertAfter
     });
 
     writeFile(jsFilePath, updated);

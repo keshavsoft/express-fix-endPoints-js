@@ -1,27 +1,19 @@
 const startFunc = ({
     content,
     insertInfo,
-    importLine
+    importLine,
+    importInsertAfter
 }) => {
     const before = content.slice(0, insertInfo.index);
-
-    const separator =
-        insertInfo.matchedPattern === "const router = "
-            ? "\n"
-            : "";
-
-    const suffix =
-        insertInfo.matchedPattern === "const router = "
-            ? "\n"
-            : "";
+    console.log("insertInfo : ", insertInfo, importInsertAfter);
 
     const isFirstInsert =
-        insertInfo.matchedPattern === "const router = ";
+        insertInfo.matchedPattern === importInsertAfter[importInsertAfter.length - 1];
 
     return before +
-        (isFirstInsert ? "\n\n" : "\n") +
-        importLine +
         (isFirstInsert ? "\n" : "") +
+        importLine +
+        "\n" +
         content.slice(insertInfo.index);
 };
 

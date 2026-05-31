@@ -6,9 +6,9 @@ import forImport from "./forImport.js";
 import forUse from "./forUse.js";
 
 const updateAppJs = ({ appJsPath, endpoint, showLog = false }) => {
-    // const fromImports = forImport({ appJsPath, endpoint, showLog });
+    const fromImports = forImport({ appJsPath, endpoint, showLog });
 
-    // if (showLog) console.log("fromImports : ", fromImports);
+    if (showLog) console.log("fromImports : ", fromImports);
 
     const fromUse = forUse({ appJsPath, endpoint, showLog });
 

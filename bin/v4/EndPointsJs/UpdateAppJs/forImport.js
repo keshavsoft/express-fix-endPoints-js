@@ -6,11 +6,14 @@ import updateImports from "./common/AlterFile/index.js";
 import validateEndpoint from "./validations/validateEndpoint.js";
 
 const buildLinesForImport = (endpoint) => {
-    const importLine = `import ${endpoint}Func from "./${endpoint}/controller.js";`;
+    const importLine = `import funcFrom${endpoint} from "./${endpoint}/controller.js";`;
     const duplicationCheck = `from "./${endpoint}/controller.js"`;
 
     const importInsertAfter =
-        `import`;
+        [
+            "import funcFrom",
+            "import express"
+        ];
 
     return { importLine, duplicationCheck, importInsertAfter };
 };

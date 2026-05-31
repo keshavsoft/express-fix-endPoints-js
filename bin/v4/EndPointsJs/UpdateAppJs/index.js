@@ -2,8 +2,6 @@
 
 import fs from "fs";
 
-import updateAppUse from "./updateUse/index.js";
-
 import forImport from "./forImport.js";
 import forUse from "./forUse.js";
 

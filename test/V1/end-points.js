@@ -4,4 +4,4 @@ const tableName = "BillsTable";
 
 const router = express.Router();
 
-export { router };
+export { router }

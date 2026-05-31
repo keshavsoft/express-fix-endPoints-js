@@ -12,7 +12,10 @@ const buildLinesForImport = (endpoint) => {
     const duplicationCheck = `router.use("/${endpoint}"`;
 
     const importInsertAfter =
-        ['router.use('];
+        [
+            "router.use(",
+            "const router = "
+        ];
 
     return { importLine, duplicationCheck, importInsertAfter };
 };

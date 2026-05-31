@@ -4,7 +4,7 @@ import findInsertIndex from "./findInsertIndex.js";
 import writeFile from "../writeFile.js";
 import validateAppJsPath from "../../validations/validateAppJsPath.js";
 
-const updateImports = ({ jsFilePath, importLine, duplicationCheck, importInsertAfter = [],
+const startFunc = ({ jsFilePath, importLine, duplicationCheck, importInsertAfter = [],
     showLog = false }) => {
 
     validateAppJsPath({
@@ -36,7 +36,7 @@ const updateImports = ({ jsFilePath, importLine, duplicationCheck, importInsertA
 
     const index = findInsertIndex({
         inContent: content,
-        inPattern: importInsertAfter
+        inPatterns: importInsertAfter
     });
 
     const before = content.slice(0, index);
@@ -55,4 +55,4 @@ const updateImports = ({ jsFilePath, importLine, duplicationCheck, importInsertA
     return summary;
 };
 
-export default updateImports;
+export default startFunc;

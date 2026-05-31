@@ -4,7 +4,7 @@ import findInsertIndex from "./findInsertIndex.js";
 import writeFile from "../writeFile.js";
 import validateAppJsPath from "../../validations/validateAppJsPath.js";
 
-const updateImports = ({ jsFilePath, importLine, duplicationCheck, importInsertAfter,
+const updateImports = ({ jsFilePath, importLine, duplicationCheck, importInsertAfter = [],
     showLog = false }) => {
 
     validateAppJsPath({

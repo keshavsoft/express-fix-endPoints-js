@@ -2,7 +2,7 @@
 
 import fs from "fs";
 
-import updateImports from "./common/AlterFile/index.js";
+import alterFile from "./common/AlterFile/index.js";
 import validateEndpoint from "./validations/validateEndpoint.js";
 
 const buildLinesForImport = (endpoint) => {
@@ -23,7 +23,7 @@ const buildLinesForImport = (endpoint) => {
 const startFunc = ({ appJsPath, endpoint, showLog = false }) => {
     validateEndpoint({ endpoint });
 
-    const fromImports = updateImports({
+    const fromImports = alterFile({
         jsFilePath: appJsPath,
         ...buildLinesForImport(endpoint),
         showLog

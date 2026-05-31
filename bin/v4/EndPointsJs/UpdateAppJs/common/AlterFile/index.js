@@ -4,55 +4,50 @@ import findInsertIndex from "./findInsertIndex.js";
 import writeFile from "../writeFile.js";
 import validateAppJsPath from "../../validations/validateAppJsPath.js";
 
-const startFunc = ({ jsFilePath, importLine, duplicationCheck, importInsertAfter = [],
-    showLog = false }) => {
-
-    validateAppJsPath({
-        jsFilePath
-    });
-
-    const summary = {
-        import: { added: false, line: null },
-    };
-
-    const content = readFile(jsFilePath);
-
-    const duplicateInfo = checkDuplicate({
+const validateDuplicate = ({ content, jsFilePath, duplicationCheck }) => {
+    return checkDuplicate({
         inContent: content,
         inFilePath: jsFilePath,
         inSearchText: duplicationCheck
     });
+};
 
-    if (duplicateInfo.found) {
-        summary.import.skipped = true;
-        summary.import.skipReason = "Duplicate in import";
-        summary.import.filePath = duplicateInfo.filePath;
-        summary.import.lineNumber = duplicateInfo.lineNumber;
-
-        if (showLog) console.log(summary);
-
-        return summary;
-    };
-
-    const index = findInsertIndex({
+const locateInsertPoint = ({ content, importInsertAfter }) => {
+    return findInsertIndex({
         inContent: content,
         inPatterns: importInsertAfter
     });
-
-    const before = content.slice(0, index);
-    const lineNumber = before.split("\n").length + 1;
-
-    const updated =
-        before + "\n" + importLine + content.slice(index);
-
-    writeFile(jsFilePath, updated);
-
-    summary.import.added = true;
-    summary.import.line = lineNumber;
-
-    if (showLog) console.log(summary);
-
-    return summary;
 };
 
-export default startFunc;
+const buildUpdatedContent = ({
+    content,
+    index,
+    importLine
+}) => {
+    const before = content.slice(0, index);
+
+    return before +
+        "\n" +
+        importLine +
+        content.slice(index);
+};
+
+const alterFile = ({
+    jsFilePath,
+    importLine,
+    duplicationCheck,
+    importInsertAfter = [],
+    showLog = false
+}) => {
+    const content = readFile(jsFilePath);
+
+    const duplicateInfo = validateDuplicate(...);
+
+    const index = locateInsertPoint(...);
+
+    const updated = buildUpdatedContent(...);
+
+    writeFile(jsFilePath, updated);
+};
+
+export default alterFile;

@@ -1,0 +1,35 @@
+{
+  "name": "express-fix-endpoints-js",
+  "version": "1.6.6",
+  "description": "CLI to build for appjs, the endpoints",
+  "keywords": [
+    "cli",
+    "scaffold",
+    "templates",
+    "node",
+    "project-generator"
+  ],
+  "dependencies": {
+  },
+  "type": "module",
+  "exports": {
+    ".": "./index.js"
+  },
+  "bin": {
+    "express-fix-endpoints-js": "./bin/cli.js"
+  },
+  "files": [
+    "bin/",
+    "index.js",
+    "README.md",
+    "LICENSE"
+  ],
+  "homepage": "https://cli.keshavsoft.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/keshavsoft/express-fix-endpoints-js"
+  },
+  "bugs": {
+    "url": "https://github.com/keshavsoft/express-fix-endpoints-js/issues"
+  }
+}

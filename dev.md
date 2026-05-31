@@ -1,163 +1,105 @@
-# Developer Notes 🚀
+# EndPoints Fix - Developer Notes
 
-## Project Name
+## Insertion Strategy
 
-```bash id="k2m8fa"
-express-fix
+Search order:
+
+```js
+[
+    "router.",
+    "const router = "
+]
 ```
 
----
+### Case 1
 
-# 📌 Purpose
+No routes exist.
 
-The purpose of this project is to automatically detect and fix incomplete or broken Express.js backend code structures.
+Insert immediately after:
 
-This utility helps developers reduce repetitive debugging and manual fixing work in Node.js and Express applications.
-
----
-
-# 🎯 Current Fix Capabilities
-
-The project currently supports fixing:
-
-* Missing `express` imports
-* Missing router initialization
-* Missing exports
-* Incomplete route files
-* Broken Express.js boilerplate code
-
----
-
-# 🛠️ Example Fixes
-
-## Missing Import
-
-### Before
-
-```js id="w8n2fp"
+```js
 const router = express.Router();
 ```
 
-### After
+Result:
 
-```js id="d3m7rt"
-import express from "express";
-
+```js
 const router = express.Router();
-```
 
----
-
-## Missing Export
-
-### Before
-
-```js id="x5q9la"
-const router = express.Router();
-```
-
-### After
-
-```js id="b4t1yc"
-const router = express.Router();
+router.post(...);
 
 export { router };
 ```
 
 ---
 
-## Missing Router
+### Case 2
 
-### Before
+Routes already exist.
 
-```js id="f7v2ks"
-import express from "express";
+Append after the last route.
+
+Result:
+
+```js
+router.post("/Alter", ...);
+router.post("/Alter1", ...);
+router.post("/Alter2", ...);
 ```
 
-### After
+No extra blank lines between routes.
 
-```js id="m8r4pd"
+---
+
+## Formatting Rules
+
+### First Insert
+
+```text
+router declaration
+blank line
+route
+blank line
+export
+```
+
+### Subsequent Inserts
+
+```text
+existing route
+new route
+new route
+export
+```
+
+No additional spacing.
+
+---
+
+## Duplicate Check
+
+Example:
+
+```js
+router.post("/Alter"
+```
+
+If found, skip insertion.
+
+---
+
+## Expected Final Layout
+
+```js
 import express from "express";
+
+const tableName = "BillsTable";
 
 const router = express.Router();
+
+router.post("/Alter", ...);
+router.post("/Alter1", ...);
+router.post("/Alter2", ...);
+
+export { router };
 ```
-
----
-
-# 📁 Development Structure
-
-```bash id="u2j6we"
-express-fix
-│
-├── archive
-├── bin
-├── test
-│
-├── index.js
-├── package.json
-├── README.md
-└── CHANGELOG.md
-```
-
----
-
-# ⚙️ Development Goals
-
-Future improvements planned for this project:
-
-* Auto-fix route methods
-* Fix middleware imports
-* Generate missing async handlers
-* Detect syntax issues
-* Smart code formatting
-* AI-assisted code repair
-
----
-
-# 🚀 Development Workflow
-
-## Install Dependencies
-
-```bash id="n4c8hz"
-npm install
-```
-
----
-
-## Run Project
-
-```bash id="q9w3mv"
-node index.js
-```
-
----
-
-## Test Changes
-
-```bash id="r5y1ta"
-npm test
-```
-
----
-
-# 🧠 Technologies Used
-
-* Node.js
-* Express.js
-* JavaScript
-* File System APIs
-
----
-
-# 📄 Notes
-
-* Lightweight utility project
-* Focused on Express.js development
-* Designed for rapid backend fixing
-* Beginner-friendly architecture
-
----
-
-# 👨‍💻 Maintainer
-
-Developed and maintained by **KeshavSoft**

@@ -1,165 +1,77 @@
-# express-fix 🚀
+# EndPoints Fix
 
-Smart JavaScript and Express.js code fixing utility for Node.js projects.
+Utility for automatically maintaining Express route files.
 
-Automatically detect and repair missing imports, exports, router setup, and common backend structure issues with minimal effort.
+## Purpose
 
----
+This module updates `end-points.js` files by:
 
-# ✨ Overview
-
-**express-fix** is a developer utility created by **KeshavSoft** to simplify fixing incomplete or broken Express.js code structures.
-
-The project helps developers automatically regenerate missing code sections commonly required in Express and Node.js applications.
-
-Instead of manually debugging repetitive structure issues, **express-fix** repairs them instantly.
+* Adding new route handlers
+* Preventing duplicate routes
+* Preserving route order
+* Maintaining consistent formatting
 
 ---
 
-# 🎯 Main Purpose
+## Generated Structure
 
-The project automatically fixes:
-
-* Missing imports
-* Missing exports
-* Missing router declarations
-* Incomplete Express setup
-* Broken route structure
-* Missing boilerplate code
-
----
-
-# ⚡ Features
-
-✅ Auto-fix Express.js route files
-✅ Detect missing imports automatically
-✅ Regenerate missing exports
-✅ Restore router initialization
-✅ Fix incomplete backend files
-✅ Lightweight and fast utility
-✅ Beginner-friendly workflow
-
----
-
-# 🛠️ Example Fixes
-
----
-
-## Missing Import
-
-### Before
-
-```js id="j2n4fc"
-const router = express.Router();
-```
-
-### After
-
-```js id="k7m1va"
+```js
 import express from "express";
 
+const tableName = "BillsTable";
+
 const router = express.Router();
-```
 
----
-
-## Missing Export
-
-### Before
-
-```js id="u5f9rt"
-const router = express.Router();
-```
-
-### After
-
-```js id="v8q2yb"
-const router = express.Router();
+router.post("/Alter", express.json(), (req, res) =>
+    AlterFunc({ req, res, inTablePath: tablePath })
+);
 
 export { router };
 ```
 
 ---
 
-## Missing Router Initialization
+## Rules
 
-### Before
+### First Route
 
-```js id="d6m4xs"
-import express from "express";
-```
+When the first route is inserted:
 
-### After
+* Add one blank line after `const router = express.Router();`
+* Add one blank line before `export { router };`
 
-```js id="e3n7pd"
-import express from "express";
+Example:
 
+```js
 const router = express.Router();
+
+router.post("/Alter", express.json(), handler);
+
+export { router };
 ```
 
----
+### Additional Routes
 
-# 🚀 Usage
+New routes are always appended after the last route.
 
-Run the utility inside your project to automatically repair incomplete Express.js files.
+Example:
 
-The tool scans route files and regenerates required structure where needed.
-
----
-
-# 📁 Folder Structure
-
-```bash id="r4w8na"
-express-fix
-│
-├── archive
-├── bin
-├── test
-│
-├── index.js
-├── package.json
-├── package-lock.json
-├── README.md
-├── CHANGELOG.md
-└── LICENSE
+```js
+router.post("/Alter", express.json(), handler);
+router.post("/Alter1", express.json(), handler);
+router.post("/Alter2", express.json(), handler);
 ```
 
----
-
-# 💡 Why Use express-fix?
-
-* Save debugging time
-* Avoid repetitive manual fixes
-* Maintain clean Express architecture
-* Improve backend productivity
-* Quickly repair broken route files
+No blank lines are inserted between routes.
 
 ---
 
-# 🧠 Built With
+## Duplicate Protection
 
-* Node.js
-* Express.js
-* JavaScript
+If a route already exists, no new route is added.
 
 ---
 
-# 📄 License
+## Goal
 
-MIT License
-
----
-
-# 👨‍💻 Author
-
-Developed by **KeshavSoft**
-
----
-
-# ⭐ Support
-
-If you like this project:
-
-* ⭐ Star the repository
-* 🍴 Fork the project
-* 🚀 Share with developers
+Produce clean and predictable Express route files automatically.

@@ -2,7 +2,8 @@ import index from "../../index.js";
 
 const startFunc = async () => {
     await index({
-        showLog: true
+        showLog: true,
+        endpoint: "Alter"
     });
 };
 

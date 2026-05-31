@@ -21,15 +21,20 @@ const locateInsertPoint = ({ content, importInsertAfter }) => {
 
 const buildUpdatedContent = ({
     content,
-    index,
+    insertInfo,
     importLine
 }) => {
-    const before = content.slice(0, index);
+    const before = content.slice(0, insertInfo.index);
+
+    const separator =
+        insertInfo.matchedPattern === "const router = "
+            ? "\n\n"
+            : "\n";
 
     return before +
-        "\n" +
+        separator +
         importLine +
-        content.slice(index);
+        content.slice(insertInfo.index);
 };
 
 const alterFile = ({
@@ -41,11 +46,19 @@ const alterFile = ({
 }) => {
     const content = readFile(jsFilePath);
 
-    const duplicateInfo = validateDuplicate(...);
+    const duplicateInfo = validateDuplicate({ content, jsFilePath, duplicationCheck });
 
-    const index = locateInsertPoint(...);
+    // const index = locateInsertPoint({ content, importInsertAfter });
+    const insertInfo = locateInsertPoint({
+        content,
+        importInsertAfter
+    });
 
-    const updated = buildUpdatedContent(...);
+    const updated = buildUpdatedContent({
+        content,
+        insertInfo,
+        importLine
+    });
 
     writeFile(jsFilePath, updated);
 };

@@ -6,13 +6,17 @@ import forImport from "./forImport.js";
 import forUse from "./forUse.js";
 
 const updateAppJs = ({ inEndPointsJsPath, actionName, showLog = false }) => {
-    const fromImports = forImport({ appJsPath: inEndPointsJsPath, endpoint, showLog });
+    const fromImports = forImport({
+        appJsPath: inEndPointsJsPath,
+        endpoint: actionName, showLog
+    });
 
     if (showLog) console.log("fromImports : ", fromImports);
 
     const fromUse = forUse({
         appJsPath: inEndPointsJsPath,
-        endpoint, showLog
+        endpoint: actionName,
+        showLog
     });
 
     if (showLog) console.log("fromUse : ", fromUse);

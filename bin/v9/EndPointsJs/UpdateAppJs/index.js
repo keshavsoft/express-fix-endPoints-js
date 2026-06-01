@@ -10,7 +10,7 @@ const updateAppJs = ({ inEndPointsJsPath, actionName, inCheckLines,
     validateEndpoint({ endpoint: actionName });
 
     const localCheckLines = inCheckLines || checkLines;
-    console.log("bbbbbbbbbbbb : ", localCheckLines);
+    // console.log("bbbbbbbbbbbb : ", localCheckLines);
 
     alterFile({
         jsFilePath: inEndPointsJsPath,

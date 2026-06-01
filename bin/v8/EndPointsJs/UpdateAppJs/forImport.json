@@ -1,8 +1,0 @@
-{
-    "importLine": "import funcFrom${endpoint} from './${endpoint}/controller.js';",
-    "duplicationCheck": "from './${endpoint}/controller.js'",
-    "insertAfter": [
-        "import funcFrom",
-        "import express"
-    ]
-}

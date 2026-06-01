@@ -1,8 +1,0 @@
-{
-    "importLine": "router.post('/${endpoint}', express.json(), (req, res) => funcFrom${endpoint}({ req, res, inTablePath: tablePath }));",
-    "duplicationCheck": "router.use('/${endpoint}'",
-    "insertAfter": [
-        "router.",
-        "const router = "
-    ]
-}

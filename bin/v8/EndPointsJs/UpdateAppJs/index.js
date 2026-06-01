@@ -27,13 +27,13 @@ const repalceFullJson = ({ inCheckLines, inEndpoint }) => {
     };
 };
 
-const updateAppJs = ({ inEndPointsJsPath, actionName,
+const updateAppJs = ({ inEndPointsJsPath, actionName, inCheckLines,
     showLog = false }) => {
 
     validateEndpoint({ endpoint: actionName });
 
     const checkLinesAltered = repalceFullJson({
-        inCheckLines: checkLines,
+        inCheckLines: inCheckLines || checkLines,
         inEndpoint: actionName
     });
 

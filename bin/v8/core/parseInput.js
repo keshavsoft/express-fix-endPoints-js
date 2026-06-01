@@ -1,4 +1,6 @@
-export default function parseInput({ endPointsJsPath, actionName, showLog }) {
+export default function parseInput({ endPointsJsPath, actionName,
+    inCheckLines = {}, showLog }) {
+
     const [...args] = process.argv.slice(2);
 
     return {
@@ -6,6 +8,7 @@ export default function parseInput({ endPointsJsPath, actionName, showLog }) {
         showLog: args[1] === undefined
             ? showLog
             : args[1] === "true",
-        endPointsJsPath: endPointsJsPath || process.cwd()
+        endPointsJsPath: endPointsJsPath || process.cwd(),
+        inCheckLines
     };
 };

@@ -14,18 +14,18 @@ const validateDuplicate = ({ content, jsFilePath, duplicationCheck }) => {
     });
 };
 
-const locateInsertPoint = ({ content, importInsertAfter }) => {
+const locateInsertPoint = ({ content, insertAfter }) => {
     return findInsertIndex({
         inContent: content,
-        inPatterns: importInsertAfter
+        inPatterns: insertAfter
     });
 };
 
 const alterFile = ({
     jsFilePath,
-    importLine,
+    toInsertLine,
     duplicationCheck,
-    importInsertAfter = [],
+    insertAfter = [],
     showLog = false
 }) => {
     const content = readFile(jsFilePath);
@@ -35,14 +35,14 @@ const alterFile = ({
     // const index = locateInsertPoint({ content, importInsertAfter });
     const insertInfo = locateInsertPoint({
         content,
-        importInsertAfter
+        insertAfter
     });
 
     const updated = buildUpdatedContent({
         content,
         insertInfo,
-        importLine,
-        importInsertAfter
+        toInsertLine,
+        insertAfter
     });
 
     writeFile(jsFilePath, updated);

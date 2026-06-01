@@ -10,20 +10,21 @@ const updateAppJs = ({ inEndPointsJsPath, actionName, inCheckLines,
     validateEndpoint({ endpoint: actionName });
 
     const localCheckLines = inCheckLines || checkLines;
+    console.log("bbbbbbbbbbbb : ", localCheckLines);
 
     alterFile({
         jsFilePath: inEndPointsJsPath,
-        importLine: localCheckLines.importLines.importLine,
+        toInsertLine: localCheckLines.importLines.toInsertLine,
         duplicationCheck: localCheckLines.importLines.duplicationCheck,
-        importInsertAfter: localCheckLines.importLines.importInsertAfter,
+        insertAfter: localCheckLines.importLines.insertAfter,
         showLog
     });
 
     alterFile({
         jsFilePath: inEndPointsJsPath,
-        importLine: localCheckLines.useLines.importLine,
+        toInsertLine: localCheckLines.useLines.toInsertLine,
         duplicationCheck: localCheckLines.useLines.duplicationCheck,
-        importInsertAfter: localCheckLines.useLines.importInsertAfter,
+        insertAfter: localCheckLines.useLines.insertAfter,
         showLog
     });
 

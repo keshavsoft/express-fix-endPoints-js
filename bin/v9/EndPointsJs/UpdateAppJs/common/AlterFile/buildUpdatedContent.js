@@ -1,18 +1,17 @@
 const startFunc = ({
     content,
     insertInfo,
-    importLine,
-    importInsertAfter
+    toInsertLine,
+    insertAfter
 }) => {
     const before = content.slice(0, insertInfo.index);
-    console.log("insertInfo : ", insertInfo, importInsertAfter);
 
     const isFirstInsert =
-        insertInfo.matchedPattern === importInsertAfter[importInsertAfter.length - 1];
+        insertInfo.matchedPattern === insertAfter[insertAfter.length - 1];
 
     return before +
         (isFirstInsert ? "\n" : "") +
-        importLine +
+        toInsertLine +
         "\n" +
         content.slice(insertInfo.index);
 };

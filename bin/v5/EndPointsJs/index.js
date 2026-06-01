@@ -1,11 +1,11 @@
 import updateAppJs from "./UpdateAppJs/index.js";
 
-export default ({ endpoint, toPath, showLog }) => {
-    const localToPath = toPath;
+export default ({ actionName, endPointsJsPath, showLog }) => {
+    const localToPath = endPointsJsPath;
 
     const fromUpdate = updateAppJs({
-        appJsPath: `${localToPath}/end-points.js`,
-        endpoint,
+        inEndPointsJsPath: `${localToPath}/end-points.js`,
+        actionName,
         showLog
     });
 

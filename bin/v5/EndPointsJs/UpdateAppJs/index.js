@@ -5,12 +5,15 @@ import fs from "fs";
 import forImport from "./forImport.js";
 import forUse from "./forUse.js";
 
-const updateAppJs = ({ appJsPath, endpoint, showLog = false }) => {
-    const fromImports = forImport({ appJsPath, endpoint, showLog });
+const updateAppJs = ({ inEndPointsJsPath, actionName, showLog = false }) => {
+    const fromImports = forImport({ appJsPath: inEndPointsJsPath, endpoint, showLog });
 
     if (showLog) console.log("fromImports : ", fromImports);
 
-    const fromUse = forUse({ appJsPath, endpoint, showLog });
+    const fromUse = forUse({
+        appJsPath: inEndPointsJsPath,
+        endpoint, showLog
+    });
 
     if (showLog) console.log("fromUse : ", fromUse);
 

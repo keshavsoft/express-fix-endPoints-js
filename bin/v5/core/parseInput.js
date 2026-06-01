@@ -1,11 +1,11 @@
-export default function parseInput({ endpoint, toPath, showLog }) {
+export default function parseInput({ endPointsJsPath, actionName, showLog }) {
     const [...args] = process.argv.slice(2);
 
     return {
-        endpoint: args[0] || endpoint,
+        actionName: args[0] || actionName,
         showLog: args[1] === undefined
             ? showLog
             : args[1] === "true",
-        toPath: toPath || process.cwd()
+        endPointsJsPath: endPointsJsPath || process.cwd()
     };
 };

@@ -10,7 +10,9 @@ const buildLinesForImport = (endpoint) => {
     return {
         importLine: importJson.importLine.replaceAll("${endpoint}", endpoint).replaceAll("'", '"'),
         duplicationCheck: importJson.duplicationCheck.replaceAll("${endpoint}", endpoint).replaceAll("'", '"'),
-        importInsertAfter: importJson.insertAfter.replaceAll("'", '"')
+        importInsertAfter: importJson.insertAfter.map(element => {
+            return element.replaceAll("'", '"')
+        })
     };
 };
 

@@ -1,6 +1,5 @@
 import fixAnyJs from "express-fix-any-js";
 import checkLines from "./checkLines.json" with {type: "json"};
-import alterFile from "./common/AlterFile/index.js";
 
 const alterLines = ({ inActionName }) => {
     let localCheckLines = checkLines;

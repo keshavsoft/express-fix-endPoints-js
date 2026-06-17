@@ -1,9 +1,10 @@
+import path from "path";
 import index from "../../index.js";
 
 const startFunc = async () => {
     await index({
         showLog: true,
-        jsFilePath: process.cwd() + "/end-points.js",
+        endPointsJsPath: path.join(process.cwd(), "end-points.js"),
         inActionName: "ToTest"
     });
 };

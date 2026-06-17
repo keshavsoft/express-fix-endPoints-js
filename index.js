@@ -6,7 +6,7 @@ const load = async ({ endPointsJsPath, inActionName, showLog }) => {
     const module = await import(`./bin/${v}/start.js`);
 
     await module.default({
-        jsFilePath: endPointsJsPath,
+        endPointsJsPath,
         inActionName, showLog
     });
 };

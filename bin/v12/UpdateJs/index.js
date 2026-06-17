@@ -1,22 +1,22 @@
-// v2/AppJs/index.js
 import fixAnyJs from "express-fix-any-js";
 import checkLines from "./checkLines.json" with {type: "json"};
 import alterFile from "./common/AlterFile/index.js";
 
-const alterLines = ({ inCheckLines, inActionName }) => {
-    inCheckLines.importLines.toInsertLine = inCheckLines.importLines.toInsertLine.replaceAll("${endpoint}", inActionName);
-    inCheckLines.importLines.duplicationCheck = inCheckLines.importLines.duplicationCheck.replaceAll("${endpoint}", inActionName).replaceAll("'", '"');
+const alterLines = ({ inActionName }) => {
+    let localCheckLines = checkLines;
 
-    inCheckLines.useLines.toInsertLine = inCheckLines.useLines.toInsertLine.replaceAll("${endpoint}", inActionName);
-    inCheckLines.useLines.duplicationCheck = inCheckLines.useLines.duplicationCheck.replaceAll("${endpoint}", inActionName).replaceAll("'", '"');
+    localCheckLines.importLines.toInsertLine = localCheckLines.importLines.toInsertLine.replaceAll("${endpoint}", inActionName);
+    localCheckLines.importLines.duplicationCheck = localCheckLines.importLines.duplicationCheck.replaceAll("${endpoint}", inActionName).replaceAll("'", '"');
+
+    localCheckLines.useLines.toInsertLine = localCheckLines.useLines.toInsertLine.replaceAll("${endpoint}", inActionName);
+    localCheckLines.useLines.duplicationCheck = localCheckLines.useLines.duplicationCheck.replaceAll("${endpoint}", inActionName).replaceAll("'", '"');
+
+    return localCheckLines;
 };
 
-const updateAppJs = ({ inJsFilePath, inCheckLines, inActionName,
-    showLog = false }) => {
+const startFunc = ({ inJsFilePath, inActionName, showLog = false }) => {
 
-    let localCheckLines = inCheckLines || checkLines;
-
-    alterLines({ inCheckLines: localCheckLines, inActionName });
+    const localCheckLines = alterLines({ inActionName });
 
     fixAnyJs({
         showLog,
@@ -27,4 +27,4 @@ const updateAppJs = ({ inJsFilePath, inCheckLines, inActionName,
     return false;
 };
 
-export default updateAppJs;
+export default startFunc;
